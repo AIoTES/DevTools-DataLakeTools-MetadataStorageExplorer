@@ -1,0 +1,78 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTableLabel">Create or edit a Table</h4>
+    </div>
+    <div class="modal-body">
+        <sim-alert-error></sim-alert-error>
+        <div class="form-group" ng-show="vm.table.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.table.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_db">Db</label>
+            <input type="text" class="form-control" name="db" id="field_db"
+                    ng-model="vm.table.db"
+                    required ng-minlength="5" ng-maxlength="20"/>
+            <div ng-show="editForm.db.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.db.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.db.$error.minlength" translate-value-min="5">
+                    This field is required to be at least 5 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.db.$error.maxlength">
+                    This field cannot be longer than 20 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_table">Table</label>
+            <input type="text" class="form-control" name="table" id="field_table"
+                    ng-model="vm.table.table"
+                    required ng-minlength="5" ng-maxlength="20"/>
+            <div ng-show="editForm.table.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.table.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.table.$error.minlength" translate-value-min="5">
+                    This field is required to be at least 5 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.table.$error.maxlength">
+                    This field cannot be longer than 20 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_data">Data</label>
+            <textarea type="text" class="form-control" name="data" id="field_data"
+                    ng-model="vm.table.data"
+            ></textarea>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_query">Query</label>
+            <textarea type="text" class="form-control" name="query" id="field_query"
+                    ng-model="vm.table.query"
+            ></textarea>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

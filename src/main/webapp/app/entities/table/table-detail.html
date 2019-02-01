@@ -1,0 +1,87 @@
+
+<div>
+    <!--<h2><span>Table</span> {{vm.table.id}}</h2>-->
+    <hr>
+    <sim-alert-error></sim-alert-error>
+
+    <form name="editForm">
+        <div class="modal-body">
+    <table class="jh-table table table-striped">
+        <thead>
+        <tr >
+            <th><span>Database name</span> <span class="glyphicon"></span></th>
+            <th><span>Table name</span> <span class="glyphicon"></span></th>
+
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+
+            <td>{{vm.table.db}}</td>
+            <td>{{vm.table.table}}</td>
+
+            <td class="text-right">
+                <div class="btn-group flex-btn-group-container">
+                    <button type="submit"
+                            ui-sref="table-detail({id:table.id})"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        <span class="hidden-sm-down"></span>
+                    </button>
+                    <button type="submit"
+                            ui-sref="table.edit({id:table.id})"
+                            class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="hidden-sm-down"></span>
+                    </button>
+                    <button type="submit"
+                            ui-sref="table.delete({id:table.id})"
+                            class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                        <span class="hidden-sm-down"></span>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+        </div>
+    </form>
+
+    <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+        <div class="modal-header">
+            <label class="control-label" for="field_data">Query</label>
+        </div>
+        <div class="modal-body">
+
+
+            <textarea ui-codemirror="cmOption" ng-model="cmModel"></textarea>
+
+            <div class="modal-footer">
+                <button rows="3" cols="100" type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Run</span>
+                </button>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label" for="field_data">Data</label>
+                <pre id="data_textview"></pre>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button rows="3" cols="100" type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Export</span>
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+
+
+</div>

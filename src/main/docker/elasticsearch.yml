@@ -1,0 +1,9 @@
+version: '2'
+services:
+    datalaketool-elasticsearch:
+        image: elasticsearch:2.4.6
+        volumes:
+            - ~/volumes/simlife/DataLakeTool/elasticsearch/:/usr/share/elasticsearch/data/
+        ports:
+            - 9210:9210
+            - 9310:9310
