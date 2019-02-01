@@ -2,7 +2,7 @@ version: '2'
 services:
     datalaketool-app:
         build: .
-        image: datalake-tool
+        image: dl-metadata-storage-explorer
         environment:
             - SPRING_PROFILES_ACTIVE=prod,swagger
             - SPRING_DATA_MONGODB_URI=mongodb://srvgal104.deri.ie:27017
