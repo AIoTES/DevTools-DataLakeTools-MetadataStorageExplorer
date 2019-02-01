@@ -1,9 +1,18 @@
-# DataLakeTool
+# DL-Metadata_storage_explorer
 
+DL-Metadata_storage_explorer is tool for exploring the metadata produced by data analytics methods and stored in the Data Lake
 
 ## Development
 
+Before you can build this project, you must install and configure the following dependencies on your machine:
 
+1. [Node.js][]: We use Node to run a development web server and build the project.
+   Depending on your system, you can install Node either from source or as a pre-packaged bundle.
+2. [Yarn][]: We use Yarn to manage Node dependencies.
+   Depending on your system, you can install Yarn either from source or as a pre-packaged bundle.
+
+After installing Node, you should be able to run the following command to install development tools.
+You will only need to run this command when dependencies change in [package.json](package.json).
 
     yarn install
 
@@ -17,11 +26,16 @@ auto-refreshes when files change on your hard drive.
     ./mvnw
     gulp
 
+[Bower][] is used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
+specifying a newer version in [bower.json](bower.json). You can also run `bower update` and `bower install` to manage dependencies.
+Add the `-h` flag on any command to see how you can use it. For example, `bower update -h`.
+
+
 
 
 ## Building for production
 
-To optimize the DataLakeTool application for production, run:
+To optimize the test application for production, run:
 
     ./mvnw -Pprod clean package
 
@@ -32,7 +46,7 @@ To ensure everything worked, run:
 
 Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
-Refer to [Using Simlife in production][] for more details.
+
 
 ## Testing
 
@@ -58,15 +72,15 @@ For more information, refer to the [Running tests page][].
 
 ## Using Docker to simplify development (optional)
 
-You can use Docker to improve your Simlife development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
+You can use Docker to improve your development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
 
-For example, to start a mongodb database in a docker container, run:
+For example, to start a mysql database in a docker container, run:
 
-    docker-compose -f src/main/docker/mongodb.yml up -d
+    docker-compose -f src/main/docker/mysql.yml up -d
 
 To stop it and remove the container, run:
 
-    docker-compose -f src/main/docker/mongodb.yml down
+    docker-compose -f src/main/docker/mysql.yml down
 
 You can also fully dockerize your application and all the services that it depends on.
 To achieve this, first build a docker image of your app by running:
@@ -77,6 +91,6 @@ Then run:
 
     docker-compose -f src/main/docker/app.yml up -d
 
-For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`simlife docker-compose`), which is able to generate docker configurations for one or several Simlife applications.
+For more information refer to [Using Docker and Docker-Compose][]
 
 ## Continuous Integration (optional)
