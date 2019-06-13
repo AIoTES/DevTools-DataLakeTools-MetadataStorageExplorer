@@ -8,6 +8,6 @@ CMD echo "The application will start in ${SIMLIFE_SLEEP}s..." && \
     sleep ${SIMLIFE_SLEEP} && \
     java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /app.war
 
-EXPOSE 8093
+EXPOSE 8080
 
 ADD *.war /app.war
