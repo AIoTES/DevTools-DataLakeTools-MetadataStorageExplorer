@@ -1,6 +1,6 @@
 # DL-Metadata_storage_explorer
 
-DL-Metadata_storage_explorer is tool for exploring the metadata produced by data analytics methods and stored in the Data Lake
+DL-Metadata_storage_explorer is tool for exploring information stored in the Data Lake
 
 ## Development
 
