@@ -54,12 +54,12 @@ public class ModelResource {
     @Timed
     public ResponseEntity<Model> createModel(@Valid @RequestBody Model model) throws URISyntaxException {
         log.debug("REST request to save Model : {}", model);
-        if (model.getId() != null) {
+        if (model.getModelID() != null) {
             throw new BadRequestAlertException("A new model cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Model result = modelService.save(model);
-        return ResponseEntity.created(new URI("/api/models/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+        return ResponseEntity.created(new URI("/api/models/" + result.getModelID()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getModelID().toString()))
             .body(result);
     }
 
@@ -76,12 +76,12 @@ public class ModelResource {
     @Timed
     public ResponseEntity<Model> updateModel(@Valid @RequestBody Model model) throws URISyntaxException {
         log.debug("REST request to update Model : {}", model);
-        if (model.getId() == null) {
+        if (model.getModelID() == null) {
             return createModel(model);
         }
         Model result = modelService.save(model);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, model.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, model.getModelID().toString()))
             .body(result);
     }
 

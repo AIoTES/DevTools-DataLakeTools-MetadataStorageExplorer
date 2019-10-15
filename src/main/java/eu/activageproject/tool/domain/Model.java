@@ -19,7 +19,7 @@ public class Model implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private String id;
+    private String modelID;
 
     @NotNull
     @Size(min = 5, max = 20)
@@ -27,8 +27,8 @@ public class Model implements Serializable {
     private String name;
 
     @NotNull
-    @Field("params")
-    private Object params;
+    @Field("modelParams")
+    private Object modelParams;
 
     @Field("created")
     private Instant created;
@@ -40,12 +40,12 @@ public class Model implements Serializable {
     private String createdBy;
 
     // simlife-needle-entity-add-field - Simlife will add fields here, do not remove
-    public String getId() {
-        return id;
+    public String getModelID() {
+        return modelID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setModelID(String modelID) {
+        this.modelID = modelID;
     }
 
     public String getName() {
@@ -61,17 +61,17 @@ public class Model implements Serializable {
         this.name = name;
     }
 
-    public Object getParams() {
-        return params;
+    public Object getModelParams() {
+        return modelParams;
     }
 
-    public Model params(Object params) {
-        this.params = params;
+    public Model modelParams(Object modelParams) {
+        this.modelParams = modelParams;
         return this;
     }
 
-    public void setParams(Object params) {
-        this.params = params;
+    public void setModelParams(Object modelParams) {
+        this.modelParams = modelParams;
     }
 
     public Instant getCreated() {
@@ -123,23 +123,23 @@ public class Model implements Serializable {
             return false;
         }
         Model model = (Model) o;
-        if (model.getId() == null || getId() == null) {
+        if (model.getModelID() == null || getModelID() == null) {
             return false;
         }
-        return Objects.equals(getId(), model.getId());
+        return Objects.equals(getModelID(), model.getModelID());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return Objects.hashCode(getModelID());
     }
 
     @Override
     public String toString() {
         return "Model{" +
-            "id=" + getId() +
+            "id=" + getModelID() +
             ", name='" + getName() + "'" +
-            ", params='" + getParams() + "'" +
+            ", params='" + getModelParams() + "'" +
             ", created='" + getCreated() + "'" +
             ", updated='" + getUpdated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +

@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>eu.activageproject.tool</groupId>
-    <artifactId>DL-Metadata_storage_explorer</artifactId>
+    <artifactId>DL-datamodel_workbench</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>DL-Metadata_storage_explorer</name>
+    <name>DL-datamodel_workbench</name>
 
     <properties>
         <!-- Build properties -->
@@ -171,11 +171,13 @@
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        
+        <!-- <dependency>
             <groupId>io.gatling.highcharts</groupId>
             <artifactId>gatling-charts-highcharts</artifactId>
             <scope>test</scope>
-        </dependency>
+        </dependency> -->
+        
         <dependency>
             <groupId>com.jcraft</groupId>
             <artifactId>jzlib</artifactId>

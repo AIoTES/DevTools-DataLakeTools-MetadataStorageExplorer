@@ -67,17 +67,20 @@ public class DataLakeToolApp {
         if (env.getProperty("server.ssl.key-store") != null) {
             protocol = "https";
         }
+        String contextPath = env.getProperty("server.context-path");
         log.info("\n----------------------------------------------------------\n\t" +
                 "Application '{}' is running! Access URLs:\n\t" +
-                "Local: \t\t{}://localhost:{}\n\t" +
-                "External: \t{}://{}:{}\n\t" +
+                "Local: \t\t{}://localhost:{}{}\n\t" +
+                "External: \t{}://{}:{}{}\n\t" +
                 "Profile(s): \t{}\n----------------------------------------------------------",
             env.getProperty("spring.application.name"),
             protocol,
             env.getProperty("server.port"),
+            contextPath != null ? contextPath : "",
             protocol,
             InetAddress.getLocalHost().getHostAddress(),
             env.getProperty("server.port"),
+            contextPath != null ? contextPath : "",
             env.getActiveProfiles());
     }
 }

@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Query</span> {{vm.query.id}}</h2>
+    <hr>
+    <sim-alert-error></sim-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Db</span></dt>
+        <dd>
+            <span>{{vm.query.db}}</span>
+        </dd>
+        <dt><span>Table</span></dt>
+        <dd>
+            <span>{{vm.query.table}}</span>
+        </dd>
+        <dt><span>Query</span></dt>
+        <dd>
+            <span>{{vm.query.query}}</span>
+        </dd>
+        <dt><span>Output</span></dt>
+        <dd>
+            <span>{{vm.query.output}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="query-detail.edit({id:vm.query.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

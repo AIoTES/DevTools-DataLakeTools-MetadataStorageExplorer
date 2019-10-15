@@ -1,6 +1,13 @@
-# DL-Metadata_storage_explorer
+# DL-datamodel_workbench
 
-DL-Metadata_storage_explorer is tool for exploring information stored in the Data Lake
+ACTIVAGE datamodel workbench is a tool for exploring the data in Data Lake produced by IoT platforms. The datamodel workbench consists of three components, i.e. Datamodel Explorer, Storage Explorer and Metadata Explorer.
+
+* The Datamodel Explorer is responsible for providing a graphical interface to the management of Models. It interacts with the [Metadata Strorage Server](https://git.activageproject.eu/Deployment/DT-AIOTES_docker/src/master/Metadata%20Storage%20server) through the APIs exposed by Metadata Storage Server. 
+
+* The Storage Explorer provides a visual interface on top of the [Independent Data Storage](https://git.activageproject.eu/Data_Analytics/DL-Independent_data_storage) and the schema part of the [Query Execution Component](https://git.activageproject.eu/Data_Analytics/DL-Query_execution) for management of Databases, Tables and Schemas. 
+
+* The Metadata Explorer component provides a graphical interface for management of Devices and Deployments. For this purpose, it interacts with the Metadata Storage Server through the APIs provided.
+
 
 ## Development
 
@@ -72,7 +79,27 @@ For more information, refer to the [Running tests page][].
 
 ## Using Docker to simplify development (optional)
 
-You can use Docker to improve your development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
+First build the workbench component using the following command:
+
+    ./mvnw -DskipTests=true -Pdev clean package
+
+Second step is to build docker image. To build docker image, run the following command:
+
+    docker build --no-cache -t docker-activage.satrd.es/dl-datamodel-workbench target
+
+Third step is to run the docker image using the following command. For this step you will need `docker-env` file available in [src/main/docker](src/main/docker). Below command should be run from the directory where the `docker-env` file exists.
+
+    docker run -d -t --env-file docker-env -p 4590:8080 docker-activage.satrd.es/dl-datamodel-workbench:latest
+
+The Datamodel Workbench can be accessed using the following URL:
+
+[http://localhost:4590/datamodel-workbench/](http://localhost:4590/datamodel-workbench/)
+
+Last step is to push docker image to the activage docker registry (docker-activage.satrd.es). Use the following command:
+
+    docker push docker-activage.satrd.es/dl-datamodel-workbench
+
+<!--- You can use Docker to improve your development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
 
 For example, to start a mysql database in a docker container, run:
 
@@ -93,4 +120,20 @@ Then run:
 
 For more information refer to [Using Docker and Docker-Compose][]
 
-## Continuous Integration (optional)
+## Continuous Integration (optional) -->
+
+## Integration with other Components
+
+The Datamodel Workbench is dependent on three components i.e. Metadata Storage Server, Independent Data Storage and Query Execution Component. It will communicate with these components if all are deployed at the following URLs:
+
+[Metadata Strorage Server:](https://git.activageproject.eu/Deployment/DT-AIOTES_docker/src/master/Metadata%20Storage%20server)
+
+    http://localhost:8081/
+
+[Independent Data Storage:](https://git.activageproject.eu/Data_Analytics/DL-Independent_data_storage)
+
+    http://localhost:4567/
+
+[Query Execution Component:](https://git.activageproject.eu/Data_Analytics/DL-Query_execution)
+
+    http://localhost:4570/

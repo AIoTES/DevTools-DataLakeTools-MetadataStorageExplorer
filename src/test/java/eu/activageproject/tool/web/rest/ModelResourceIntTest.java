@@ -97,7 +97,7 @@ public class ModelResourceIntTest {
     public static Model createEntity() {
         Model model = new Model()
             .name(DEFAULT_NAME)
-            .params(DEFAULT_PARAMS)
+            .modelParams(DEFAULT_PARAMS)
             .created(DEFAULT_CREATED)
             .updated(DEFAULT_UPDATED)
             .createdBy(DEFAULT_CREATED_BY);
@@ -126,13 +126,13 @@ public class ModelResourceIntTest {
         assertThat(modelList).hasSize(databaseSizeBeforeCreate + 1);
         Model testModel = modelList.get(modelList.size() - 1);
         assertThat(testModel.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testModel.getParams()).isEqualTo(DEFAULT_PARAMS);
+        assertThat(testModel.getModelParams()).isEqualTo(DEFAULT_PARAMS);
         assertThat(testModel.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testModel.getUpdated()).isEqualTo(DEFAULT_UPDATED);
         assertThat(testModel.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
 
         // Validate the Model in Elasticsearch
-        Model modelEs = modelSearchRepository.findOne(testModel.getId());
+        Model modelEs = modelSearchRepository.findOne(testModel.getModelID());
         assertThat(modelEs).isEqualToIgnoringGivenFields(testModel);
     }
 
@@ -141,7 +141,7 @@ public class ModelResourceIntTest {
         int databaseSizeBeforeCreate = modelRepository.findAll().size();
 
         // Create the Model with an existing ID
-        model.setId("existing_id");
+        model.setModelID("existing_id");
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restModelMockMvc.perform(post("/api/models")
@@ -175,7 +175,7 @@ public class ModelResourceIntTest {
     public void checkParamsIsRequired() throws Exception {
         int databaseSizeBeforeTest = modelRepository.findAll().size();
         // set the field null
-        model.setParams(null);
+        model.setModelParams(null);
 
         // Create the Model, which fails.
 
@@ -197,7 +197,7 @@ public class ModelResourceIntTest {
         restModelMockMvc.perform(get("/api/models?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(model.getId())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(model.getModelID())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].params").value(hasItem(DEFAULT_PARAMS.toString())))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
@@ -211,10 +211,10 @@ public class ModelResourceIntTest {
         modelRepository.save(model);
 
         // Get the model
-        restModelMockMvc.perform(get("/api/models/{id}", model.getId()))
+        restModelMockMvc.perform(get("/api/models/{id}", model.getModelID()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(model.getId()))
+            .andExpect(jsonPath("$.id").value(model.getModelID()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.params").value(DEFAULT_PARAMS.toString()))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
@@ -237,10 +237,10 @@ public class ModelResourceIntTest {
         int databaseSizeBeforeUpdate = modelRepository.findAll().size();
 
         // Update the model
-        Model updatedModel = modelRepository.findOne(model.getId());
+        Model updatedModel = modelRepository.findOne(model.getModelID());
         updatedModel
             .name(UPDATED_NAME)
-            .params(UPDATED_PARAMS)
+            .modelParams(UPDATED_PARAMS)
             .created(UPDATED_CREATED)
             .updated(UPDATED_UPDATED)
             .createdBy(UPDATED_CREATED_BY);
@@ -255,13 +255,13 @@ public class ModelResourceIntTest {
         assertThat(modelList).hasSize(databaseSizeBeforeUpdate);
         Model testModel = modelList.get(modelList.size() - 1);
         assertThat(testModel.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testModel.getParams()).isEqualTo(UPDATED_PARAMS);
+        assertThat(testModel.getModelParams()).isEqualTo(UPDATED_PARAMS);
         assertThat(testModel.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testModel.getUpdated()).isEqualTo(UPDATED_UPDATED);
         assertThat(testModel.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
 
         // Validate the Model in Elasticsearch
-        Model modelEs = modelSearchRepository.findOne(testModel.getId());
+        Model modelEs = modelSearchRepository.findOne(testModel.getModelID());
         assertThat(modelEs).isEqualToIgnoringGivenFields(testModel);
     }
 
@@ -290,12 +290,12 @@ public class ModelResourceIntTest {
         int databaseSizeBeforeDelete = modelRepository.findAll().size();
 
         // Get the model
-        restModelMockMvc.perform(delete("/api/models/{id}", model.getId())
+        restModelMockMvc.perform(delete("/api/models/{id}", model.getModelID())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());
 
         // Validate Elasticsearch is empty
-        boolean modelExistsInEs = modelSearchRepository.exists(model.getId());
+        boolean modelExistsInEs = modelSearchRepository.exists(model.getModelID());
         assertThat(modelExistsInEs).isFalse();
 
         // Validate the database is empty
@@ -309,10 +309,10 @@ public class ModelResourceIntTest {
         modelService.save(model);
 
         // Search the model
-        restModelMockMvc.perform(get("/api/_search/models?query=id:" + model.getId()))
+        restModelMockMvc.perform(get("/api/_search/models?query=id:" + model.getModelID()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(model.getId())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(model.getModelID())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].params").value(hasItem(DEFAULT_PARAMS.toString())))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
@@ -324,13 +324,13 @@ public class ModelResourceIntTest {
     public void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Model.class);
         Model model1 = new Model();
-        model1.setId("id1");
+        model1.setModelID("id1");
         Model model2 = new Model();
-        model2.setId(model1.getId());
+        model2.setModelID(model1.getModelID());
         assertThat(model1).isEqualTo(model2);
-        model2.setId("id2");
+        model2.setModelID("id2");
         assertThat(model1).isNotEqualTo(model2);
-        model1.setId(null);
+        model1.setModelID(null);
         assertThat(model1).isNotEqualTo(model2);
     }
 }

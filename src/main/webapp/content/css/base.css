@@ -1,0 +1,96 @@
+body {
+  display: block;
+  background: #eef0f2;
+  font-size: 11px;
+  font: 62.5%/1.4 Arial,Helvetica,Verdana,sans-serif;
+  font-style: normal;
+  font-variant-ligatures: normal;
+  font-variant-caps: normal;
+  font-variant-numeric: normal;
+  font-variant-east-asian: normal;
+  font-weight: normal;
+  font-stretch: normal;
+  font-size: 62.5%;
+  line-height: 1.4;
+  font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+
+h1, h2, h3 {
+  margin: 1em 0;
+}
+
+.ui-tabs .ui-tabs-nav {
+  padding: 0.25em;
+  padding-left: 0.5em;
+}
+
+.menu-items {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 100%;
+}
+
+.menu-item {
+  padding-top: 20px;
+  width: 360px;
+  height: 200px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  font-weight: bold;
+}
+
+#wrapper {
+  background: 0;
+  margin: 0 auto;
+  max-width: 90%;
+  min-width: 960px;
+  position: relative;
+}
+
+#banner {
+  background: 0;
+  height: auto;
+  margin-top: 1.4em;
+  position: relative;
+}
+
+#content {
+  font-size: 1.4em;
+}
+
+#copyright {
+  font-size: 0.8em;
+  color: #808080;
+  text-align: right;
+  margin: 0.5em;
+}
+
+#copyright a:link {
+  color: #202020;
+  text-decoration: none;
+}
+
+#copyright a:visited {
+  color: #202020;
+  text-decoration: none;
+}
+
+#copyright a:hover {
+  color: #202020;
+  text-decoration: underline;
+}
+
+#copyright a:active {
+  color: #202020;
+  text-decoration: none;
+}
+
+#app {
+  border: none;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  min-height: 800px;
+}
