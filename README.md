@@ -1,12 +1,6 @@
-# DL-datamodel_workbench
+# DL-Metadata_storage_explorer
 
-ACTIVAGE datamodel workbench is a tool for exploring the data in Data Lake produced by IoT platforms. The datamodel workbench consists of three components, i.e. Datamodel Explorer, Storage Explorer and Metadata Explorer.
-
-* The Datamodel Explorer is responsible for providing a graphical interface to the management of Models. It interacts with the [Metadata Strorage Server](https://git.activageproject.eu/Deployment/DT-AIOTES_docker/src/master/Metadata%20Storage%20server) through the APIs exposed by Metadata Storage Server. 
-
-* The Storage Explorer provides a visual interface on top of the [Independent Data Storage](https://git.activageproject.eu/Data_Analytics/DL-Independent_data_storage) and the schema part of the [Query Execution Component](https://git.activageproject.eu/Data_Analytics/DL-Query_execution) for management of Databases, Tables and Schemas. 
-
-* The Metadata Explorer component provides a graphical interface for management of Devices and Deployments. For this purpose, it interacts with the Metadata Storage Server through the APIs provided.
+DL-Metadata_storage_explorer is tool for exploring information stored in the Data Lake.
 
 
 ## Development
@@ -79,7 +73,7 @@ For more information, refer to the [Running tests page][].
 
 ## Using Docker to simplify development (optional)
 
-First build the workbench component using the following command:
+First build this component using the following command:
 
     ./mvnw -DskipTests=true -Pdev clean package
 
@@ -91,7 +85,7 @@ Third step is to run the docker image using the following command. For this step
 
     docker run -d -t --env-file docker-env -p 4590:8080 docker-activage.satrd.es/dl-datamodel-workbench:latest
 
-The Datamodel Workbench can be accessed using the following URL:
+The metadata storage explorer can be accessed using the following URL:
 
 [http://localhost:4590/datamodel-workbench/](http://localhost:4590/datamodel-workbench/)
 
@@ -124,7 +118,7 @@ For more information refer to [Using Docker and Docker-Compose][]
 
 ## Integration with other Components
 
-The Datamodel Workbench is dependent on three components i.e. Metadata Storage Server, Independent Data Storage and Query Execution Component. It will communicate with these components if all are deployed at the following URLs:
+This component is dependent on three components i.e. Metadata Storage Server, Independent Data Storage and Query Execution Component. It will communicate with these components if all are deployed at the following URLs:
 
 [Metadata Strorage Server:](https://git.activageproject.eu/Deployment/DT-AIOTES_docker/src/master/Metadata%20Storage%20server)
 
